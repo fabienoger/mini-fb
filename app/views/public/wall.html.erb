@@ -45,7 +45,7 @@
             </div>
             <div class="row">
               <div class="large-6 large-offset-7 columns">
-                <p> Posted: <%= post.updated_at.strftime("%A %d %B") %>, at <%= post.updated_at.strftime("%H:%M") %>  </p>
+                <p> Posted: <%= post.created_at.strftime("%A %d %B, %Y") %>, at <%= post.created_at.strftime("%H:%M") %>.  </p>
               </div>
             </div>
           </article>
