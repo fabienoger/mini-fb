@@ -1,2 +1,26 @@
-<h1>Public#wall</h1>
-<p>Find me in app/views/public/wall.html.erb</p>
+<div class="row wall">
+  <div class="columns medium-6">
+    <h1>Public#wall</h1>
+    <p>Find me in app/views/public/wall.html.erb</p>
+  </div>
+  <div class="columns medium-6 list-users">
+    <div class="row title-list">
+      <div class="columns medium-6">
+        <span>Name</span>
+      </div>
+      <div class="columns medium-6">
+        <span>Email</span>
+      </div>
+    </div>
+    <% @users.each do |user| %>
+      <div class="row row-list">
+        <div class="columns medium-6">
+          <%= user.name %>
+        </div>
+        <div class="columns medium-6">
+          <%= user.email %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

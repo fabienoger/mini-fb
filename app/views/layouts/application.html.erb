@@ -21,7 +21,7 @@
       </ul>
       <ul class="menu right">
         <% if user_signed_in? %>
-          <li><%= link_to 'Edit', edit_user_registration_path %></li>
+          <li><%= link_to current_user.name, edit_user_registration_path %></li>
           <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log out</a></li>
         <% else %>
           <li><a class="color" href="/users/sign_up">Sign up</a></li>
