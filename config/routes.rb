@@ -2,7 +2,13 @@ Rails.application.routes.draw do
 
   get 'public/wall'
 
-  devise_for :users
+  #SECOND OPTION
+  #devise_for :users
+  #devise_for :users, controllers: { sessions: "users/sessions" }
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
 
   root to: 'public#wall'
   # The priority is based upon order of creation: first created -> highest priority.
