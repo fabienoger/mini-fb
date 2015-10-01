@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  root "home"
+  get 'public/wall'
+
+  devise_for :users
+
+  root to: 'public#wall'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
