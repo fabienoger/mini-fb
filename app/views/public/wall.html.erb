@@ -1,2 +1,24 @@
 <h1>Public#wall</h1>
 <p>Find me in app/views/public/wall.html.erb</p>
+
+<% if @user %>
+
+<form action="/publish" action="POST">
+  <p> Publiez un message :</p>
+  <textarea name="post[message]"></textarea>
+  <input type="submit" value="Publier !">
+</form>
+
+<% end %>
+<ul>
+<% @posts.each do |post| %>
+<li>
+  <article>
+    <p> <%= post.message %> </p>
+    <p> <%= post.created_at %> </p>
+    <p> <%= post.updated_at %> </p>
+  </article>
+</li>
+
+<% end %>
+</ul>
