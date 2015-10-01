@@ -1,0 +1,30 @@
+header.top-bar {
+  height: 45px;
+
+  ul.title-area {
+    li.name h1 {
+      margin-left: 20px;
+      color: #CCCCCC;
+    }
+  }
+
+  ul.menu {
+    li {
+      display: inline-block;
+      height: 45px;
+      a {
+        display: inline-block;
+        color: #FFF;
+        transition: 0.5s;
+        line-height: 45px;
+        padding: 0 10px;
+        height: 45px;
+      }
+      a:hover {
+        background-color: #FFF;
+        color: #333333;
+        border-bottom: 2px solid #333333;
+      }
+    }
+  }
+}

@@ -19,6 +19,15 @@
           <h1>The UnFaceBook</h1>
         </li>
       </ul>
+      <ul class="menu right">
+        <% if user_signed_in? %>
+          <li><%= link_to 'Edit', edit_user_registration_path %></li>
+          <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log out</a></li>
+        <% else %>
+          <li><a class="color" href="/users/sign_up">Sign up</a></li>
+          <li><a class="color" href="/users/sign_in">Login</a></li>
+        <% end %>
+      </ul>
     </header>
     <main class="container">
       <% if notice %>
