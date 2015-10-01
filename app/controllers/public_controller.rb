@@ -1,7 +1,7 @@
 class PublicController < ApplicationController
   def wall
     @user = current_user
-    @posts = @user.posts
+    @posts = @user.posts.reverse
   end
 
   def publish
@@ -9,7 +9,7 @@ class PublicController < ApplicationController
     @post = Post.new message: params[:post][:message], user_id: @user.id
 
     if @post.save
-      render 'wall'
+      redirect_to '/'
     else
       render 'wall'
     end

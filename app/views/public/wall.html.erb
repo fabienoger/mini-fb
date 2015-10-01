@@ -1,24 +1,59 @@
-<h1>Public#wall</h1>
-<p>Find me in app/views/public/wall.html.erb</p>
+
+<div class="row">
+  <div class="large-6 large-offset-4 columns">
+    <h1>Your Wall !</h1>
+  </div>
+</div>
 
 <% if @user %>
 
 <form action="/publish" action="POST">
-  <p> Publiez un message :</p>
-  <textarea name="post[message]"></textarea>
-  <input type="submit" value="Publier !">
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <div class="small-10 columns">
+          <label> Publiez un message :</label>
+          <textarea name="post[message]"></textarea>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="small-2 columns">
+        <input type="submit" value="Publier !" class="button postfix">
+      </div>
+    </div>
+  </div>
 </form>
 
 <% end %>
-<ul>
-<% @posts.each do |post| %>
-<li>
-  <article>
-    <p> <%= post.message %> </p>
-    <p> <%= post.created_at %> </p>
-    <p> <%= post.updated_at %> </p>
-  </article>
-</li>
+<div class="row">
+  <ul class="no-bullet">
+  <% @posts.each do |post| %>
+  <div class="large-12 columns">
+    <div class="row collapse">
+      <div class="small-10 columns">
+        <li>
+          <article class="panel">
+            <div class="row">
+              <p> <%= @user.email %> </p>
+            </div>
+            <div class="row">
+              <p> <%= post.message %> </p>
+            </div>
+            <div class="row">
+              <div class="large-6 large-offset-7 columns">
+                <p> Posted: <%= post.updated_at.strftime("%A %d %B") %>, at <%= post.updated_at.strftime("%H:%M") %>  </p>
+              </div>
+            </div>
+          </article>
+        </li>
+      </div>
+    </div>
+  </div>
 
-<% end %>
-</ul>
+  <% end %>
+  </ul>
+</div>
