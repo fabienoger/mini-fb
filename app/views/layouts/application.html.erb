@@ -7,8 +7,6 @@
     <title><%= content_for?(:title) ? yield(:title) : "The UnFaceBook" %></title>
 
     <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -20,8 +18,8 @@
         </li>
       </ul>
       <ul class="menu right">
-        <li><a href="/">Home</a></li>
         <% if user_signed_in? %>
+          <li><a href="/">Home</a></li>
           <li><%= link_to current_user.name, edit_user_registration_path %></li>
           <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log out</a></li>
         <% else %>
@@ -43,5 +41,7 @@
       <% end %>
       <%= yield %>
     </main>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
   </body>
 </html>

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
   resources :posts
   get 'public/wall'
   get '/publish' => 'public#publish'
@@ -9,9 +12,6 @@ Rails.application.routes.draw do
   #devise_for :users, controllers: { sessions: "users/sessions" }
 
   get '/users/:id' => 'users#show'
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
 
   root to: 'public#wall'
   # The priority is based upon order of creation: first created -> highest priority.

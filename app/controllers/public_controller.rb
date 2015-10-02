@@ -1,4 +1,6 @@
 class PublicController < ApplicationController
+  before_action :authenticate_user!
+
   def wall
     @users = User.all
     @user = current_user
