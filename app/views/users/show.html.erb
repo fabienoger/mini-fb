@@ -1,2 +1,16 @@
-<%= @user.name %>
-<%= @user.email %>
+<div class="row user-page">
+  <div class="columns medium-6">
+    <p><%= @user.name %></p>
+    <p><%= @user.email %></p>
+    <%= form_tag "/users/#{@user.id}", method: "post" do %>
+      <input class="button" type="submit" value="Add Friend" />
+    <% end %>
+  </div>
+  <div class="columns medium-6">
+    <ul>
+      <% @friends.each do |friend| %>
+        <li><%= friend.name %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
