@@ -20,6 +20,7 @@
         </li>
       </ul>
       <ul class="menu right">
+        <li><a href="/">Home</a></li>
         <% if user_signed_in? %>
           <li><%= link_to current_user.name, edit_user_registration_path %></li>
           <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log out</a></li>

@@ -14,11 +14,14 @@
     </div>
     <% @users.each do |user| %>
       <div class="row row-list">
-        <div class="columns medium-6">
+        <div class="columns medium-5">
           <%= user.name %>
         </div>
-        <div class="columns medium-6">
+        <div class="columns medium-5">
           <%= user.email %>
+        </div>
+        <div class="columns medium-2">
+          <a href="/users/<%= user.id %>">Show</a>
         </div>
       </div>
     <% end %>
