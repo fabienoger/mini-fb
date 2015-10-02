@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :posts
   get 'public/wall'
+  get '/publish' => 'public#publish'
 
   #SECOND OPTION
   #devise_for :users
