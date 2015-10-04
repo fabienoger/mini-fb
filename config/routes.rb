@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'friends/create'
+
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
@@ -12,6 +14,9 @@ Rails.application.routes.draw do
   #devise_for :users, controllers: { sessions: "users/sessions" }
 
   get '/users/:id' => 'users#show'
+
+  post '/users/:id' => 'friends#create'
+  delete '/users/:id' => 'friends#destroy'
 
   root to: 'public#wall'
   # The priority is based upon order of creation: first created -> highest priority.

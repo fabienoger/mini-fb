@@ -17,6 +17,10 @@
           <h1>The UnFaceBook</h1>
         </li>
       </ul>
+      <%= form_tag "/users/find", method: "post", class: "" do %>
+        <input type="text" name="search-field" id="search-field" />
+        <input type="submit" class="button" />
+      <% end %>
       <ul class="menu right">
         <% if user_signed_in? %>
           <li><a href="/">Home</a></li>
