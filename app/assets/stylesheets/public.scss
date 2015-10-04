@@ -1,12 +1,20 @@
 div.row.wall {
-  div.list-users {
-    div.title-list {
-     border-bottom: 2px solid #eaeaea;
-      padding: 15px;
+  ul.collection {
+    li.collection-item {
+      span.collection-email {
+        display: inline-block;
+        margin-left: 20px;
+      }
     }
-    div.row-list {
-      border-bottom: 2px solid #eaeaea;
-      padding: 15px;
+  }
+
+  div.posts {
+    ul li {
+      div.card-action {
+        span {
+          color: #ffab43;
+        }
+      }
     }
   }
 }

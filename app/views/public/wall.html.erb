@@ -1,87 +1,54 @@
 <div class="row wall">
-  <div class="columns medium-6">
-    <h1>Public#wall</h1>
-    <p>Find me in app/views/public/wall.html.erb</p>
+  <div class="col s10 offset-s1 m10 offset-m1 l10 offset-l1">
+    <ul class="collection with-header">
+      <li class="collection-header light-blue darken-4 white-text"><h4>List Users</h4></li>
+      <% @users.each do |user| %>
+        <li class="collection-item">
+          <span class="title"><%= user.name %></span>
+          <span class="collection-email"><%= user.email %></span>
+          <a class="secondary-content light-blue-text darken-4-text" href="/users/<%= user.id %>"><i class="material-icons">visibility</i></a>
+        </li>
+      <% end %>
+    </ul>
   </div>
-  <div class="columns medium-6 list-users">
-    <div class="row title-list">
-      <div class="columns medium-6">
-        <span>Name</span>
-      </div>
-      <div class="columns medium-6">
-        <span>Email</span>
-      </div>
+  <div class="row">
+    <div class="m6 offset-m3 col">
+      <h1 class="center-align">Your Wall !</h1>
     </div>
-    <% @users.each do |user| %>
-      <div class="row row-list">
-        <div class="columns medium-5">
-          <%= user.name %>
-        </div>
-        <div class="columns medium-5">
-          <%= user.email %>
-        </div>
-        <div class="columns medium-2">
-          <a href="/users/<%= user.id %>">Show</a>
-        </div>
-      </div>
-    <% end %>
   </div>
-
-<div class="row">
-  <div class="large-6 large-offset-4 columns">
-    <h1>Your Wall !</h1>
-  </div>
-</div>
 
 <% if @user %>
-
-<form action="/publish" action="POST">
   <div class="row">
-    <div class="large-12 columns">
-      <div class="row collapse">
-        <div class="small-10 columns">
-          <label> Publiez un message :</label>
-          <textarea name="post[message]"></textarea>
+    <form action="/publish" action="POST" class="col s12 m12">
+      <div class="row">
+        <div class="input-field s10 offset-s1 col">
+          <i class="material-icons prefix">mode_edit</i>
+          <textarea id="icon_prefix2" class="materialize-textarea" name="post[message]"></textarea>
+          <label for="icon_prefix2">Publiez un message :</label>
+          <button type="submit" class="light-blue darken-4 btn waves-effect waves-light" name="action">
+            Publier <i class="material-icons right">send</i>
+          </button>
         </div>
-
       </div>
-    </div>
+    </form>
   </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <div class="small-2 columns">
-        <input type="submit" value="Publier !" class="button postfix">
-      </div>
-    </div>
-  </div>
-</form>
-
 <% end %>
-<div class="row">
-  <ul class="no-bullet">
-  <% @posts.each do |post| %>
-  <div class="large-12 columns">
-    <div class="row collapse">
-      <div class="small-10 columns">
-        <li>
-          <article class="panel">
-            <div class="row">
-              <p> <%= @user.email %> </p>
-            </div>
-            <div class="row">
-              <p> <%= post.message %> </p>
-            </div>
-            <div class="row">
-              <div class="large-6 large-offset-7 columns">
-                <p> Posted: <%= post.created_at.strftime("%A %d %B, %Y") %>, at <%= post.created_at.strftime("%H:%M") %>.  </p>
-              </div>
-            </div>
-          </article>
-        </li>
-      </div>
-    </div>
-  </div>
 
-  <% end %>
+<div class="row posts">
+  <ul>
+    <% @posts.each do |post| %>
+      <li class="s12 m10 offset-m1 col">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <a href="/users/<%= @user.id %>" class="card-title"><%= @user.name %></a>
+            <p><%= post.message %></p>
+          </div>
+          <div class="card-action">
+            <span><%= @user.email %></span>
+            <span class="right"><%= post.created_at.strftime("%A %d %B, %Y") %>, at <%= post.created_at.strftime("%H:%M") %></span>
+          </div>
+        </div>
+      </li>
+    <% end %>
   </ul>
 </div>
