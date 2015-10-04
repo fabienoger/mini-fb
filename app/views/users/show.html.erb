@@ -1,15 +1,24 @@
 <div class="row user-page">
   <div class="columns medium-6">
-    <p><%= @user.name %></p>
-    <p><%= @user.email %></p>
-    <%= form_tag "/users/#{@user.id}", method: "post" do %>
-      <input class="button" type="submit" value="Add Friend" />
+    <p>Name: <%= @other.name %></p>
+    <p>Email: <%= @other.email %></p>
+    <% if current_user.id != @other.id %>
+      <% if @we_are_friends == 1 %>
+        <%= form_tag "/users/#{@other.id}", method: "delete" do %>
+          <input class="button alert" type="submit" value="Destroy your Friend" />
+        <% end %>
+      <% else %>
+        <%= form_tag "/users/#{@other.id}", method: "post" do %>
+          <input class="button" type="submit" value="Add Friend" />
+        <% end %>
+      <% end %>
     <% end %>
   </div>
   <div class="columns medium-6">
-    <ul>
+    <ul class="friends-list">
+      <h4>Friends</h4>
       <% @friends.each do |friend| %>
-        <li><%= friend.name %></li>
+        <li><a href="/users/<%= friend.id %>"><%= friend.name %></a></li>
       <% end %>
     </ul>
   </div>
