@@ -3,10 +3,12 @@ class FriendsController < ApplicationController
 
   def create
     @user = current_user
-    if @user.id != params[:id]
-      @friend = Friend.new user_id: @user.id, friend_id: params[:id]
+    params[:rq_id] = JSON.parse params[:rq_id] if params[:rq_id].is_a? String
+    params[:cr_id] = JSON.parse params[:cr_id] if params[:cr_id].is_a? String
+    if params[:cr_id] != params[:rq_id]
+      @friend = Friend.new user_id: params[:cr_id], friend_id: params[:rq_id]
       @friend.save
-      @friend = Friend.new user_id: params[:id], friend_id: @user.id
+      @friend = Friend.new user_id: params[:rq_id], friend_id: params[:cr_id]
       @friend.save
       redirect_to request.referrer || '/'
     else

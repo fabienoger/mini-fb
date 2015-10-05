@@ -13,7 +13,6 @@ class UsersController < ApplicationController
   end
 
   def search
-    search = User.where(['name LIKE ? OR email LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%"])
-    @user = search[0]
+    @search = User.where(['name LIKE ? OR email LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%"])
   end
 end

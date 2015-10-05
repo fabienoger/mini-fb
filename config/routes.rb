@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get '/publish' => 'public#publish'
 
 
-  get 'friends/create'
+  #get 'friends/create'
   get '/users/:id' => 'users#show'
 
   post '/users/:id' => 'friends#create'
