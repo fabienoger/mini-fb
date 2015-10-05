@@ -15,17 +15,36 @@
     <header class="navbar-fixed">
       <nav>
         <div class="nav-wrapper light-blue darken-4">
-          <a href="/" class="brand-logo">The UnFaceBook</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <div class="row">
+            <a href="/" class="brand-logo">The UnFaceBook</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <% if user_signed_in? %>
-              <li><a href="/">Home</a></li>
-              <li><%= link_to current_user.name, edit_user_registration_path %></li>
-              <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log out</a></li>
-            <% else %>
-              <li><a class="color" href="/users/sign_up">Sign up</a></li>
-              <li><a class="color" href="/users/sign_in">Login</a></li>
+              <%= form_tag '/search', method: 'post', class: "col m4 offset-m4" do %>
+                <input type="text" name="search" />
+                <input type="submit" class="btn" />
+              <% end %>
             <% end %>
-          </ul>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <% if user_signed_in? %>
+                <li><a href="/">Home</a></li>
+                <li><%= link_to current_user.name, edit_user_registration_path %></li>
+                <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log out</a></li>
+              <% else %>
+                <li><a class="color" href="/users/sign_up">Sign up</a></li>
+                <li><a class="color" href="/users/sign_in">Login</a></li>
+              <% end %>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+              <% if user_signed_in? %>
+                <li><a href="/">Home</a></li>
+                <li><%= link_to current_user.name, edit_user_registration_path %></li>
+                <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log out</a></li>
+              <% else %>
+                <li><a class="color" href="/users/sign_up">Sign up</a></li>
+                <li><a class="color" href="/users/sign_in">Login</a></li>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </nav>
     </header>
