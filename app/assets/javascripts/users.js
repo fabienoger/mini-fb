@@ -1,9 +1,48 @@
 $(document).ready(function() {
   var path = document.URL.split("/");
   id = path[path.length - 1];
-  userInfo = document.getElementById("user-id");
-  currentUserId = userInfo.className;
-  $("#addFriend").click(function() {
+  if (path[path.length -2] == "users" && id > 0)
+  {
+    userInfo = document.getElementById("user-id");
+    currentUserId = userInfo.className;
+    console.log(userInfo.className);
+    button = document.getElementById("btnFriend");
+    we_are_friend = document.getElementById("we_are_friend").className;
+    console.log(we_are_friend);
+
+    function addFriend() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.status == 200 && xmlhttp.readyState == 4)
+        {
+          button.innerHTML = "Remove";
+          button.onclick = removeFriend;
+        }
+      }
+      xmlhttp.open("POST", "http://localhost:3000/users/" + id, true);
+      xmlhttp.send();
+    }
+
+    function removeFriend() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.status == 200 && xmlhttp.readyState == 4)
+        {
+          button.innerHTML = "Add";
+          button.onclick = addFriend;
+        }
+      }
+    xmlhttp.open("DELETE", "http://localhost:3000/users/" + id, true);
+    xmlhttp.send();
+    }
+
+    if (we_are_friend == "false")
+      button.onclick = addFriend;
+    else
+      button.onclick = removeFriend;
+  }
+/*
+$("#addFriend").click(function() {
     $.ajax({
       type: "POST",
       url: document.URL,
@@ -17,7 +56,7 @@ $(document).ready(function() {
     });
   });
 
-  /*$("#destroyFriend").click(function() {
+  $("#destroyFriend").click(function() {
     $.ajax({
       type: "delete",
       url: document.URL,
@@ -29,5 +68,6 @@ $(document).ready(function() {
         });
       }
     });
-  });*/
+  });
+  */
 });

@@ -36,15 +36,8 @@
       </div>
       <% if current_user.id != @other.id %>
         <div class="card-action">
-        <% if @we_are_friends == 1 %>
-          <%= form_tag "/users/#{@other.id}", method: "delete" do %>
-            <input class="btn red darken-2" id="destroyFriend" type="submit" value="Destroy your Friend" />
-          <% end %>
-        <% else %>
-          <%= form_tag "/users/#{@other.id}", method: "post" do %>
-            <input class="btn light-blue accent-3" id="addFriend" type="submit" value="Add Friend" />
-          <% end %>
-        <% end %>
+        <button class="btn light-blue accent-3" id="btnFriend" type="submit">AddFriend</button>
+        <div class="<%= @we_are_friends == 1 %>" id="we_are_friend"></div>
         </div>
       <% end %>
     </div>

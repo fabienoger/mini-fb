@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  autocomplete :user, :name, :full => true
+  autocomplete :brand, :name do |items|
+     CustomJSON::Encoder.encode(items)
+  end
 
   def show
     @other = User.find(params[:id])
