@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/' => 'public#wall'
   get 'public/wall'
   get '/publish' => 'public#publish'
-
+  post '/publish/:id' => 'public#friendPublish'
 
   #get 'friends/create'
   get '/users/:id' => 'users#show'
