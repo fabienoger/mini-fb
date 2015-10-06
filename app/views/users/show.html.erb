@@ -67,7 +67,7 @@
           <li class="s12 m10 offset-m1 col">
             <div class="card blue-grey darken-1">
               <div class="card-content white-text">
-                <a href="/users/<%= post.user_id %>" class="card-title"><%= User.find(post.user_id).name %></a> <% if post.friend_id %> to <a href="/users/<%= post.friend_id %>" class="card-title"><%= User.find(post.friend_id).name %></a><% end %>
+                <p class="card-title"><a href="/users/<%= post.user_id %>" class="orange-text accent-2"><%= User.find(post.user_id).name %></a> <% if post.friend_id %> to <a href="/users/<%= post.friend_id %>" class="orange-text accent-2"><%= User.find(post.friend_id).name %></a><% end %></p>
                 <p><%= post.message %></p>
               </div>
               <div class="card-action">
