@@ -17,10 +17,10 @@
   </div>
   <div class="col m12 s12 l6">
     <div class="card blue-grey darken-1">
-      <div class="card-content white-text">
+      <div id="cardContentFriend" class="card-content white-text">
         <span class="card-title">Friends</span>
         <% if @friends.length > 0 %>
-          <ul class="collection">
+          <ul class="collection" id="listFriends">
             <% @friends.each do |friend| %>
               <li class="collection-item blue-grey-text darken-1">
                 <div>
@@ -36,7 +36,7 @@
       </div>
       <% if current_user.id != @other.id %>
         <div class="card-action">
-        <button class="btn light-blue accent-3" id="btnFriend" type="submit">AddFriend</button>
+        <button class="btn" id="btnFriend" type="submit"></button>
         <div class="<%= @we_are_friends == 1 %>" id="we_are_friend"></div>
         </div>
       <% end %>
