@@ -30,7 +30,7 @@ module MiniFb
       :user_name => "yoan.dieu@gmail.com",
       :password  => ENV["MANDRILL_PASSWORD"], # SMTP password is any valid API key
       :authentication => 'login', # Mandrill supports 'plain' or 'login'
-      :domain => 'http://vps164881.ovh.net/', # your domain to identify your server when connecting
+      :domain => 'vps164881.ovh.net', # your domain to identify your server when connecting
     }
   end
 end
