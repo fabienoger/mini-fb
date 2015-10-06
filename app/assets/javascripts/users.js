@@ -10,13 +10,13 @@ $(document).ready(function() {
     $userName = document.getElementById("userName");
     currentUserId = $userInfo.className;
 
-    if ($listFriends = document.getElementById("listFriends"))
-      var issetListFriend = 1;
-    else
-      var issetListFriend = 0;
 
     function addFriend() {
       var xmlhttp = new XMLHttpRequest();
+      if ($listFriends = document.getElementById("listFriends"))
+        var issetListFriend = 1;
+      else
+        var issetListFriend = 0;
       xmlhttp.onreadystatechange = function() {
         if (xmlhttp.status == 200 && xmlhttp.readyState == 4)
         {
@@ -26,6 +26,7 @@ $(document).ready(function() {
             node.className = "collection";
             node.id = "listFriends";
             $cardFriend.appendChild(node);
+            console.log($cardFriend);
           }
           $listFriends = document.getElementById("listFriends");
           redButton();
@@ -33,12 +34,16 @@ $(document).ready(function() {
           $button.onclick = removeFriend;
         }
       }
-      xmlhttp.open("POST", "http://vps164881.ovh.net/users/" + id, true);
+      xmlhttp.open("POST", "http://localhost:3000/users/" + id, true);
       xmlhttp.send();
     }
 
     function removeFriend() {
       var xmlhttp = new XMLHttpRequest();
+      if ($listFriends = document.getElementById("listFriends"))
+        var issetListFriend = 1;
+      else
+        var issetListFriend = 0;
       xmlhttp.onreadystatechange = function() {
         if (xmlhttp.status == 200 && xmlhttp.readyState == 4)
         {
@@ -59,7 +64,7 @@ $(document).ready(function() {
           $button.onclick = addFriend;
         }
       }
-      xmlhttp.open("DELETE", "http://vps164881.ovh.net/users/" + id, true);
+      xmlhttp.open("DELETE", "http://localhost:3000/users/" + id, true);
       xmlhttp.send();
     }
 
