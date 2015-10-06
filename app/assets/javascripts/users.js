@@ -3,20 +3,34 @@ $(document).ready(function() {
   id = path[path.length - 1];
   if (path[path.length -2] == "users" && id > 0)
   {
-    userInfo = document.getElementById("user-id");
-    currentUserId = userInfo.className;
-    console.log(userInfo.className);
-    button = document.getElementById("btnFriend");
-    we_are_friend = document.getElementById("we_are_friend").className;
-    console.log(we_are_friend);
+    $userInfo = document.getElementById("user-id");
+    $button = document.getElementById("btnFriend");
+    $we_are_friend = document.getElementById("we_are_friend").className;
+    $cardFriend = document.getElementById("cardContentFriend");
+    $userName = document.getElementById("userName");
+    currentUserId = $userInfo.className;
+
+    if ($listFriends = document.getElementById("listFriends"))
+      var issetListFriend = 1;
+    else
+      var issetListFriend = 0;
 
     function addFriend() {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
         if (xmlhttp.status == 200 && xmlhttp.readyState == 4)
         {
-          button.innerHTML = "Remove";
-          button.onclick = removeFriend;
+          if (issetListFriend == 0)
+          {
+            var node = document.createElement("ul");
+            node.className = "collection";
+            node.id = "listFriends";
+            $cardFriend.appendChild(node);
+          }
+          $listFriends = document.getElementById("listFriends");
+          redButton();
+          $listFriends.innerHTML += '<li id="newFriend" class="collection-item blue-grey-text darken-1"><div>' + $userName.innerHTML + '<a href="/users/' + id + '" class="secondary-content light-blue-text darken-4"><i class="material-icons">send</i></a></div></li>';
+          $button.onclick = removeFriend;
         }
       }
       xmlhttp.open("POST", "http://localhost:3000/users/" + id, true);
@@ -28,46 +42,52 @@ $(document).ready(function() {
       xmlhttp.onreadystatechange = function() {
         if (xmlhttp.status == 200 && xmlhttp.readyState == 4)
         {
-          button.innerHTML = "Add";
-          button.onclick = addFriend;
+          if ($listFriends.children.length == 1)
+            $listFriends.parentNode.removeChild($listFriends);
+          else
+          {
+            if(document.getElementById("newFriend"))
+              $listFriends.removeChild(document.getElementById("newFriend"));
+            for (i = 0; i < $listFriends.children.length; i++)
+            {
+              var toto = $listFriends.children[i].childNodes[1].textContent.indexOf($userName.innerHTML);
+              if (toto != -1)
+                $listFriends.removeChild($listFriends.children[i]);
+            }
+          }
+          blueButton();
+          $button.onclick = addFriend;
         }
       }
       xmlhttp.open("DELETE", "http://localhost:3000/users/" + id, true);
       xmlhttp.send();
     }
 
-    if (we_are_friend == "false")
-      button.onclick = addFriend;
-    else
-      button.onclick = removeFriend;
-  }
-/*
-$("#addFriend").click(function() {
-    $.ajax({
-      type: "POST",
-      url: document.URL,
-      data: {rq_id: id, cr_id: currentUserId},
-      dataType: 'json',
-      success: function(data) {
-        $.each(data, function(key, value) {
-          document.forms['new_qued_item'].elements['qued_item_' + key].value = value
-        });
-      }
-    });
-  });
+    function redButton() {
+      $('#btnFriend').removeClass('light-blue');
+      $('#btnFriend').removeClass('accent-3');
+      $('#btnFriend').addClass('red');
+      $('#btnFriend').addClass('darken-1');
+      $button.innerHTML = "Remove";
+    }
 
-  $("#destroyFriend").click(function() {
-    $.ajax({
-      type: "delete",
-      url: document.URL,
-      data: "data",
-      dataType: 'json',
-      success: function(data) {
-        $.each(data, function(key, value) {
-          document.forms['new_qued_item'].elements['qued_item_' + key].value = value
-        });
-      }
-    });
-  });
-  */
+    function blueButton() {
+      $('btnFriend').removeClass('red');
+      $('#btnFriend').removeClass('darken-1');
+      $('#btnFriend').addClass('light-blue');
+      $('#btnFriend').addClass('accent-3');
+      $button.innerHTML = "Add Friend";
+    }
+
+    if ($we_are_friend == "false")
+    {
+      blueButton();
+      $button.onclick = addFriend;
+    }
+    else
+    {
+      redButton();
+      $button.onclick = removeFriend;
+    }
+  }
 });

@@ -27,7 +27,7 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
               <% if user_signed_in? %>
                 <li><a href="/">Home</a></li>
-                <li><%= link_to current_user.name, edit_user_registration_path %></li>
+                <li><%= link_to current_user.name, edit_user_registration_path, id: "userName" %></li>
                 <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log out</a></li>
               <% else %>
                 <li><a class="color" href="/users/sign_up">Sign up</a></li>
