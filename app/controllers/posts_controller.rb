@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    redirect_to request.referer || '/'
     @posts = Post.all
   end
 
