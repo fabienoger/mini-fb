@@ -43,10 +43,11 @@
           </div>
           <div class="card-action">
             <% if current_user.id == post.user_id %>
-               <span> <%= link_to "Supprimer", post, method: :delete %></span>
+               <span> <%= link_to "Delete", post, method: :delete %></span>
            <% end %>
             <span class="right"><%= post.created_at.strftime("%A %d %B, %Y") %>, at <%= post.created_at.strftime("%H:%M") %></span>
           </div>
+
         </div>
       </li>
     <% end %>

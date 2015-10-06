@@ -57,9 +57,17 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to '/', notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def destroyOwn
+    @post = Post.find(params[:id])
+    if @post.user_id == current_user.id
+      @post.destroy
+    end
+
   end
 
   private
