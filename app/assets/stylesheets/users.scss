@@ -1,5 +1,10 @@
 div.row.user-page {
+  padding: 10px 40px 30px 40px;
   .friends-list {
     list-style-type: none;
   }
+}
+
+div.row.login, div.row.sign-up, div.row.confirm-email, div.row.forgot-password, div.row.edit-password {
+  padding: 10px 40px 30px 40px;
 }

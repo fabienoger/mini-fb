@@ -1,22 +1,25 @@
 Rails.application.routes.draw do
 
-  get 'friends/create'
+  #SECOND OPTION
+  #devise_for :users
+  #devise_for :users, controllers: { sessions: "users/sessions" }
 
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
   resources :posts
+  get '/' => 'public#wall'
   get 'public/wall'
   get '/publish' => 'public#publish'
+  post '/publish/:id' => 'public#friendPublish'
 
-  #SECOND OPTION
-  #devise_for :users
-  #devise_for :users, controllers: { sessions: "users/sessions" }
-
+  #get 'friends/create'
   get '/users/:id' => 'users#show'
 
   post '/users/:id' => 'friends#create'
   delete '/users/:id' => 'friends#destroy'
+
+  post '/search' => 'users#search'
 
   root to: 'public#wall'
   # The priority is based upon order of creation: first created -> highest priority.

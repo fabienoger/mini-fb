@@ -1,51 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "The UnFaceBook" %></title>
+    <title>The UnFaceBook</title>
 
-    <%= stylesheet_link_tag    "application" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <header class="top-bar" data-topbar role="navigation">
-      <ul class="title-area">
-        <li class="name">
-          <h1>The UnFaceBook</h1>
-        </li>
-      </ul>
-      <%= form_tag "/users/find", method: "post", class: "" do %>
-        <input type="text" name="search-field" id="search-field" />
-        <input type="submit" class="button" />
-      <% end %>
-      <ul class="menu right">
-        <% if user_signed_in? %>
-          <li><a href="/">Home</a></li>
-          <li><%= link_to current_user.name, edit_user_registration_path %></li>
-          <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log out</a></li>
-        <% else %>
-          <li><a class="color" href="/users/sign_up">Sign up</a></li>
-          <li><a class="color" href="/users/sign_in">Login</a></li>
-        <% end %>
-      </ul>
+    <header class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper light-blue darken-4">
+          <div class="row">
+            <a href="/" class="brand-logo">The UnFaceBook</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <% if user_signed_in? %>
+              <%= form_tag '/search', method: 'post', class: "col m4 offset-m4" do %>
+                <input type="text" name="search" />
+                <input type="submit" class="btn" />
+              <% end %>
+            <% end %>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <% if user_signed_in? %>
+                <li><a href="/">Home</a></li>
+                <li><%= link_to current_user.name, edit_user_registration_path %></li>
+                <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log out</a></li>
+              <% else %>
+                <li><a class="color" href="/users/sign_up">Sign up</a></li>
+                <li><a class="color" href="/users/sign_in">Login</a></li>
+              <% end %>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+              <% if user_signed_in? %>
+                <li><a href="/">Home</a></li>
+                <li><%= link_to current_user.name, edit_user_registration_path %></li>
+                <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log out</a></li>
+              <% else %>
+                <li><a class="color" href="/users/sign_up">Sign up</a></li>
+                <li><a class="color" href="/users/sign_in">Login</a></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
     <main class="container">
       <% if notice %>
-        <div data-alert class="alert-box success">
-          <span class="notice"><%= notice %></span>
+        <div class="card-panel">
+          <span class="notice light-blue-text accent-3"><%= notice %></span>
         </div>
       <% end %>
       <% if alert %>
-        <div data-alert class="alert-box alert">
-          <span class="alert"><%= alert %></span>
+        <div class="card-panel red lighten-4">
+          <span class="red-text darken-4"><%= alert %></span>
         </div>
       <% end %>
       <%= yield %>
     </main>
-    <%= javascript_include_tag "vendor/modernizr" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   </body>
 </html>

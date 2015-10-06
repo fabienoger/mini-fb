@@ -18,4 +18,15 @@ class PublicController < ApplicationController
     end
 
   end
+
+  def friendPublish
+    @user = current_user
+    @post = Post.new message: params[:post][:message], user_id: @user.id, friend_id: params[:id]
+
+    if @post.save
+      redirect_to "/users/#{params[:id]}" || '/'
+    else
+      redirect_to "/users/#{params[:id]}" || '/'
+    end
+  end
 end
