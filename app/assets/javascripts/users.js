@@ -33,7 +33,7 @@ $(document).ready(function() {
           $button.onclick = removeFriend;
         }
       }
-      xmlhttp.open("POST", "http://localhost:3000/users/" + id, true);
+      xmlhttp.open("POST", "http://vps164881.ovh.net/users/" + id, true);
       xmlhttp.send();
     }
 
@@ -59,7 +59,7 @@ $(document).ready(function() {
           $button.onclick = addFriend;
         }
       }
-      xmlhttp.open("DELETE", "http://localhost:3000/users/" + id, true);
+      xmlhttp.open("DELETE", "http://vps164881.ovh.net/users/" + id, true);
       xmlhttp.send();
     }
 
