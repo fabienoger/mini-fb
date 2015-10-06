@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   post '/search' => 'users#search'
 
+  delete '/posts/:id/destroy' => 'posts#destroyOwn'
+
   root to: 'public#wall'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
