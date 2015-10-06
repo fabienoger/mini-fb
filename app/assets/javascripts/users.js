@@ -32,8 +32,8 @@ $(document).ready(function() {
           button.onclick = addFriend;
         }
       }
-    xmlhttp.open("DELETE", "http://localhost:3000/users/" + id, true);
-    xmlhttp.send();
+      xmlhttp.open("DELETE", "http://localhost:3000/users/" + id, true);
+      xmlhttp.send();
     }
 
     if (we_are_friend == "false")
