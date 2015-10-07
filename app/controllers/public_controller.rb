@@ -4,7 +4,19 @@ class PublicController < ApplicationController
   def wall
     @users = User.all
     @user = current_user
-    @posts = @user.posts.reverse
+    @friends = User.where(id: @user.friends.map{|v| [v.friend_id]})
+    @friendsPosts = []
+    @friends.each do |friend|
+      friend.posts.each do |post|
+        if post.friend_id == nil || post.friend_id == current_user.id
+          @friendsPosts.push(post)
+        end
+      end
+    end
+
+    @userPosts = @user.posts.reverse
+    @mixedposts = @userPosts + @friendsPosts
+    @posts = @mixedposts.sort_by! { |p| p.created_at }.reverse
   end
 
   def publish
