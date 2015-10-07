@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-
+  autocomplete :users, :name, :full => true
   def show
     @posts = Post.personal(params[:id]).reverse
     @other = User.find(params[:id])

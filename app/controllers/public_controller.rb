@@ -14,7 +14,7 @@ class PublicController < ApplicationController
       end
     end
 
-    @userPosts = @user.posts.reverse
+    @userPosts = @user.posts
     @mixedposts = @userPosts + @friendsPosts
     @posts = @mixedposts.sort_by! { |p| p.created_at }.reverse
   end

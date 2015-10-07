@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   get '/publish' => 'public#publish'
   post '/publish/:id' => 'public#friendPublish'
 
+  resources :users do
+    get :autocomplete_users_name, :on => :collection
+  end
+
   #get 'friends/create'
   get '/users/:id' => 'users#show'
 

@@ -20,7 +20,7 @@
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <% if user_signed_in? %>
               <%= form_tag '/search', method: 'post', class: "col m4 offset-m4" do %>
-                <input type="text" name="search" />
+                <input autocomplete="off" name="users" id="search" class="search-query ui-autocomplete-input" placeholder="Rechercher" data-autocomplete="/users/autocomplete_users_name_users_path" type="search">
                 <input type="submit" class="btn" />
               <% end %>
             <% end %>
