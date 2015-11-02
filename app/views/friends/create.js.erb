@@ -1,0 +1,32 @@
+function changeHtml()
+{
+    $('#listFriends').append('<li class="collection-item blue-grey-text darken-1"><div><%= @user.name %><a href="/users/<%= @user.id %>" class="secondary-content light-blue-text darken-4"><i class="material-icons">send</i></a></div></li>');
+    $('#formAddFriend').append("<input type='hidden' name='_method' value='delete'>");
+    $('#formAddFriend').attr("method", "delete");
+    $('#btnAddFriend').attr("value", "Remove");
+    $('#btnAddFriend').addClass("red darken-1");
+    $('#btnAddFriend').removeClass("light-blue accent-3");
+    $('#btnAddFriend').attr("id", "btnRemoveFriend");
+    $('#formAddFriend').attr("id", "formRemoveFriend");
+    $('#postMessage').css("display", "block");
+}
+
+if($('#listFriends').length)
+{
+  <% if flash[:friend_success] == true %>
+    changeHtml();
+    <% puts "Success create.js".green %>
+  <% else %>
+    <% puts "Error create.js".red %>
+  <% end %>
+}
+else
+{
+  <% if flash[:friend_success] == true %>
+    $('#cardContentFriend').append('<ul class="collection" id="listFriends"></ul>');
+    changeHtml();
+    <% puts "Success create.js".green %>
+  <% else %>
+    <% puts "Error create.js".red %>
+  <% end %>
+}

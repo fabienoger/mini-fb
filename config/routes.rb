@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   resources :posts
+  resources :friends, only: [:create, :destroy]
   get '/' => 'public#wall'
   get 'public/wall'
   get '/publish' => 'public#publish'
