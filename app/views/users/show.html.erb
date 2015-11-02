@@ -35,16 +35,29 @@
         <% end %>
       </div>
       <% if current_user.id != @other.id %>
-        <div class="card-action">
-        <button class="btn" id="btnFriend" type="submit"></button>
-        <div class="<%= @we_are_friends == 1 %>" id="we_are_friend"></div>
+        <div class="card-action" id="friend-card-action">
+          <% if @we_are_friends != 1 %>
+            <%= form_for(:friend, remote: true, :html => { :id => "formAddFriend" }) do |f|  %>
+              <%= f.hidden_field :user_id, value: current_user.id  %>
+              <%= f.hidden_field :id, value: @other.id  %>
+              <%= f.submit 'Add Friend', class: "btn light-blue accent-3", id: "btnAddFriend" %>
+            <% end %>
+          <% else %>
+            <%= form_for(:friend, :method => :delete, remote: true, :html => { :id => "formRemoveFriend" }) do |f|  %>
+              <%= f.hidden_field :user_id, value: current_user.id  %>
+              <%= f.hidden_field :id, value: @other.id  %>
+              <%= f.submit 'Remove', class: "btn red darken-1", id: "btnRemoveFriend" %>
+            <% end %>
+          <% end %>
         </div>
+        <!--<button class="btn" id="btnFriend" type="submit"></button>
+        <div class="<%= @we_are_friends == 1 %>" id="we_are_friend"></div>-->
       <% end %>
     </div>
   </div>
   <div class="col s12 m12 l12">
     <% if current_user %>
-      <div class="row">
+      <div class="row <% if @we_are_friends != 1 %><%= "displayNone" %><% end %>" id="postMessage">
         <%= form_tag "/publish/#{@other.id}", method: "post", class: "col s12 m12 l12" do %>
           <div class="row">
             <div class="input-field s10 offset-s1 col">

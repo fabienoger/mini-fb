@@ -9,6 +9,9 @@ class UsersController < ApplicationController
     @my_friends.each do |f|
       if f.id == @other.id
         @we_are_friends = 1
+        break
+      else
+        @we_are_friends = 0
       end
     end
   end

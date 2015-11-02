@@ -1,54 +1,43 @@
 <div class="row wall">
-  <div class="col s10 offset-s1 m10 offset-m1 l10 offset-l1">
-    <ul class="collection with-header">
-      <li class="collection-header light-blue darken-4 white-text"><h4>List Users</h4></li>
-      <% @users.each do |user| %>
-        <li class="collection-item">
-          <span class="title"><%= user.name %></span>
-          <span class="collection-email"><%= user.email %></span>
-          <a class="secondary-content light-blue-text darken-4-text" href="/users/<%= user.id %>"><i class="material-icons">visibility</i></a>
-        </li>
-      <% end %>
-    </ul>
-  </div>
   <div class="col s6 offset-s3 m6 offset-m3 l6 offset-l3">
     <h1 class="center-align">Your Wall !</h1>
   </div>
 
-<% if @user %>
-  <div class="row">
-    <form action="/publish" action="POST" class="col s12 m12">
-      <div class="row">
-        <div class="input-field s10 offset-s1 col">
-          <i class="material-icons prefix">mode_edit</i>
-          <textarea id="icon_prefix2" class="materialize-textarea" name="post[message]"></textarea>
-          <label for="icon_prefix2">Publiez un message :</label>
-          <button type="submit" class="light-blue darken-4 btn waves-effect waves-light" name="action">
-            Publier <i class="material-icons right">send</i>
-          </button>
+  <% if @user %>
+    <div class="row">
+      <form action="/publish" action="POST" class="col s12 m12">
+        <div class="row">
+          <div class="input-field s10 offset-s1 col">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="icon_prefix2" class="materialize-textarea" name="post[message]"></textarea>
+            <label for="icon_prefix2">Publiez un message :</label>
+            <button type="submit" class="light-blue darken-4 btn waves-effect waves-light" name="action">
+              Publier <i class="material-icons right">send</i>
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
-  </div>
-<% end %>
+      </form>
+    </div>
+  <% end %>
 
-<div class="row posts">
-  <ul>
-    <% @posts.each do |post| %>
-      <li class="s12 m10 offset-m1 col">
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text">
-            <span><a href="/users/<%= post.user_id %>" class="card-title"><%= post.user_id %></a> <% if post.friend_id %>, to <a href="/users/<%= post.user_id %>" class="card-title"><%= post.friend_id %></a> <% end %></span>
-            <p><%= post.message %></p>
+  <div class="row posts">
+    <ul>
+      <% @posts.each do |post| %>
+        <li class="s12 m10 offset-m1 col">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span><a href="/users/<%= post.user_id %>" class="card-title"><%= post.user_id %></a> <% if post.friend_id %>, to <a href="/users/<%= post.user_id %>" class="card-title"><%= post.friend_id %></a> <% end %></span>
+              <p><%= post.message %></p>
+            </div>
+            <div class="card-action">
+              <% if current_user.id == post.user_id %>
+                 <span> <%= link_to "Supprimer", post, method: :delete %></span>
+             <% end %>
+              <span class="right"><%= post.created_at.strftime("%A %d %B, %Y") %>, at <%= post.created_at.strftime("%H:%M") %></span>
+            </div>
           </div>
-          <div class="card-action">
-            <% if current_user.id == post.user_id %>
-               <span> <%= link_to "Supprimer", post, method: :delete %></span>
-           <% end %>
-            <span class="right"><%= post.created_at.strftime("%A %d %B, %Y") %>, at <%= post.created_at.strftime("%H:%M") %></span>
-          </div>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
